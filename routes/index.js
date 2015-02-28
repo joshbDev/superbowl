@@ -5,6 +5,7 @@
 var data = require("../data");
 	var	winners = [];
 for(year in data) {
+	data[year].sbYear = year;
 	winners.push(data[year]);
 }
 console.log(winners);

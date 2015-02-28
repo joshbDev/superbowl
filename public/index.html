@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Football is fun!</title>
+<style>
+body {font-family:georgia;}
+#SB {
+	max-width:600px;
+	margin:5px;
+	padding:2px;
+}
+#SB > div {
+	padding:5px;
+	min-height:40px;
+	margin-bottom:5px;
+	border:1px solid #E77D2C;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	position:relative; /* required to place #pic to right */
+}
+
+#Team h3 {
+	font-family:georgia;
+	padding:5px;
+	color:#fff;
+	background:#E77D2C;
+	margin:0;
+}
+</style>
+<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {  
+
+	$('.category').click(function(e){
+        e.preventDefault(); //stop default action of the link
+		cat = $(this).attr("href");  //get category from URL
+		loadAJAX(cat);  //load AJAX and parse JSON file
+	});
+});	
+
+
+function loadAJAX(cat)
+{
+	console.log(cat);
+	$.ajax({  
+		type: "GET",
+		dataType: "json",  
+		url: "/team/" + cat,
+		success: sbJSON,
+	});
+
+	$('#SB').html('');//clear data
+}
+
+function toConsole(data)
+{//return data to console for JSON examination
+	console.log(data); //to view,use Chrome console, ctrl + shift + j
+}
+
+function sbJSON(data){
+	//$('#output').text(JSON.stringify(data));  //uncomment to view raw output
+	$('#Team').html("And They've Played In...");
+for(i=0, x=data.sb.length; i<x;i++){
+	var small = data.sb;
+		var text = '<b>Super Bowl Name:</b>: ' + small[i].sbYear + '<br />';
+		text += '<b>Date</b>: ' + small[i].date + '<br />';
+		text += '<b>Location</b>: ' + small[i].location + '<br />';
+		text += '<b>Team</b>: ' + small[i].teams[0] + ", " + small[i].teams[1] + '<br />';
+		text += '<b>Score</b>: ' + small[i].score + '<br />';
+		text += '<b>Winner</b>: ' + small[i].winner + '<br />';
+		text += '<b>Attendance</b>: ' + small[i].attendance + '<br />';
+		$('<div></div>').html(text).appendTo('#SB');  
+	};
+}
+
+</script>
+</head>
+	<body>
+	<h1>Super Bowl Teams!</h1>
+		<a href="GreenBayPackers" class="category">Green Bay Packers</a><br />
+		<a href="ChicagoBears" class="category">Chicago Bears</a><br />
+		<a href="BuffaloBills" class="category">Buffalo Bills</a><br />
+		<a href="MiamiDolphins" class="category">Miami Dolphins</a><br />
+		<a href="NewEnglandPatriots" class="category">New England Patriots</a><br />
+		<a href="NewYorkJets" class="category">New York Jets</a><br />
+		<a href="BaltimoreRavens" class="category">Baltimore Ravens</a><br />
+		<a href="CincinattiBengals" class="category">Cincinatti Bengals</a><br />
+		<a href="ClevelandBrowns" class="category">Cleveland Browns</a><br />
+		<a href="PittsburghSteelers" class="category">Pittsburgh Steelers</a><br />
+		<a href="HoustonTexans" class="category">Houston Texans</a><br />
+		<a href="IndianapolisColts" class="category">Indianapolis Colts</a><br />
+		<a href="JacksonvilleJaguars" class="category">Jacksonville Jaguars</a><br />
+		<a href="TennesseeTitans" class="category">Tennessee Titans</a><br />
+		<a href="DenverBroncos" class="category">Denver Broncos</a><br />
+		<a href="KansasCityChiefs" class="category">Kansas City Chiefs</a><br />
+		<a href="OaklandRaiders" class="category">Oakland Raiders</a><br />
+		<a href="SanDiegochargers" class="category">San Diego Chargers</a><br />
+		<a href="DallasCowboys" class="category">Dallas Cowboys</a><br />
+		<a href="NewYorkGiants" class="category">New York Giants</a><br />
+		<a href="PhiladelphiaEagles" class="category">Philedalphia Eagles</a><br />
+		<a href="WashingtonRedskins" class="category">Washington Redskins</a><br />
+		<a href="DetroitLions" class="category">Detroit Lions</a><br />
+		<a href="MinnesotaVikings" class="category">Minnesota Vikings</a><br />
+		<a href="AtlantaFalcons" class="category">Atlanta Falcons</a><br />
+		<a href="CarolinaPanthers" class="category">Carolina Panthers</a><br />
+		<a href="NewOrleansSaints" class="category">New Orleans Saints</a><br />
+		<a href="TampaBayBuccaneers" class="category">Tampa Bay Buccaneers</a><br />
+		<a href="ArizonaCardinals" class="category">Arizona Cardinals</a><br />
+		<a href="St.LouisRams" class="category">St Louis Rams</a><br />
+		<a href="SanFrancisco49ers" class="category">San Francisco 49ers</a><br />
+		<a href="SeattleSeahawks" class="category">Seattle Seahawks</a><br />
+		<h3 id="Team">Title Will Go Here</h3>
+		<div id="SB">
+			<p>Super Bowls will go here</p>
+		</div>
+	</body>
+</html>
