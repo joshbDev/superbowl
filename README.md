@@ -1,11 +1,17 @@
 # superbowl
 This is a node.js server that serves up any team's super bowls if you go to the /team/ and type in the team you're looking for in CapitalizeByWord!
 
+THIS WILL NOT WORK ON YOUR TEST SERVER WITHOUT NODE INSTALLED.
+
+if you'd like to use this in the session, please hit the server that the test is running from, it's always running!
+
+see the example below for how you can retrieve json based on any team.
+
 You first need to make sure that Node is installed on your computer, as well as NPM. 
 
 you can see a working model of this here:
 
-http://ec2-54-69-26-195.us-west-2.compute.amazonaws.com:3000/team
+http://ec2-54-69-26-195.us-west-2.compute.amazonaws.com:3000/
 
 for example: http://ec2-54-69-26-195.us-west-2.compute.amazonaws.com:3000/team/GreenBayPackers
 
